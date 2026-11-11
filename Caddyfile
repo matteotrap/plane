@@ -1,0 +1,27 @@
+{
+	servers {
+		max_header_size 25MB
+		client_ip_headers X-Forwarded-For X-Real-IP
+		trusted_proxies static 0.0.0.0/0
+	}
+}
+
+{$SITE_ADDRESS} {
+	request_body {
+		max_size {$FILE_SIZE_LIMIT}
+	}
+
+	redir /spaces /spaces/ permanent
+	reverse_proxy /spaces/* plane-trap-space.internal:3000
+
+	redir /god-mode /god-mode/ permanent
+	reverse_proxy /god-mode/* plane-trap-admin.internal:3000
+
+	reverse_proxy /live/* plane-trap-live.internal:3000
+
+	reverse_proxy /api/* plane-trap-api.internal:8000
+	reverse_proxy /auth/* plane-trap-api.internal:8000
+	reverse_proxy /static/* plane-trap-api.internal:8000
+
+	reverse_proxy /* plane-trap-web.internal:3000
+}

@@ -1,0 +1,9 @@
+app = "plane-trap-web"
+primary_region = "fra"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[vm]
+  size = "shared-cpu-1x"
+  memory_mb = 512

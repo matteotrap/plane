@@ -1,0 +1,38 @@
+app = "plane-trap-api"
+primary_region = "fra"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[processes]
+  app = "./bin/docker-entrypoint-api.sh"
+
+release_command = "./bin/docker-entrypoint-migrator.sh"
+
+[env]
+  DEBUG = "0"
+  GUNICORN_WORKERS = "2"
+  WEB_URL = "https://task.trapstudio.it"
+  CORS_ALLOWED_ORIGINS = "https://task.trapstudio.it"
+  USE_MINIO = "0"
+  AWS_REGION = "auto"
+  AWS_S3_ENDPOINT_URL = "https://fly.storage.tigris.dev"
+  AWS_S3_BUCKET_NAME = "plane-trap-uploads"
+  FILE_SIZE_LIMIT = "5242880"
+  PGHOST = "plane-trap-db.internal"
+  PGDATABASE = "plane"
+  POSTGRES_USER = "plane"
+  POSTGRES_DB = "plane"
+  POSTGRES_PORT = "5432"
+  REDIS_HOST = "plane-trap-redis.internal"
+  REDIS_PORT = "6379"
+  RABBITMQ_HOST = "plane-trap-mq.internal"
+  RABBITMQ_PORT = "5672"
+  RABBITMQ_USER = "plane"
+  RABBITMQ_VHOST = "plane"
+  API_KEY_RATE_LIMIT = "60/minute"
+  AUTHENTICATION_RATE_LIMIT = "10/minute"
+
+[vm]
+  size = "shared-cpu-1x"
+  memory_mb = 1024

@@ -1,0 +1,16 @@
+app = "plane-trap-redis"
+primary_region = "fra"
+
+[build]
+  image = "valkey/valkey:7.2.11-alpine"
+
+[processes]
+  app = "valkey-server --appendonly yes"
+
+[mounts]
+  source = "redis_data"
+  destination = "/data"
+
+[vm]
+  size = "shared-cpu-1x"
+  memory_mb = 256

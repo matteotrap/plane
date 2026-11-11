@@ -1,0 +1,14 @@
+app = "plane-trap-live"
+primary_region = "fra"
+
+[build]
+  image = "makeplane/plane-live:v1.4.3"
+
+[env]
+  API_BASE_URL = "http://plane-trap-api.internal:8000"
+  # ioredis defaults to IPv4 lookups, but Fly's private network is IPv6-only.
+  REDIS_URL = "redis://plane-trap-redis.internal:6379/?family=6"
+
+[vm]
+  size = "shared-cpu-1x"
+  memory_mb = 256

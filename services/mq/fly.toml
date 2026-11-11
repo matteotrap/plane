@@ -1,0 +1,18 @@
+app = "plane-trap-mq"
+primary_region = "fra"
+
+[build]
+  image = "rabbitmq:3.13.6-management-alpine"
+
+[env]
+  RABBITMQ_DEFAULT_USER = "plane"
+  RABBITMQ_DEFAULT_VHOST = "plane"
+  RABBITMQ_NODENAME = "rabbit@localhost"
+
+[mounts]
+  source = "rabbitmq_data"
+  destination = "/var/lib/rabbitmq"
+
+[vm]
+  size = "shared-cpu-1x"
+  memory_mb = 512

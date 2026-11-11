@@ -1,0 +1,34 @@
+app = "plane-trap-worker"
+primary_region = "fra"
+
+[build]
+  image = "makeplane/plane-backend:v1.4.3"
+
+[processes]
+  worker = "./bin/docker-entrypoint-worker.sh"
+  beat = "./bin/docker-entrypoint-beat.sh"
+
+[env]
+  DEBUG = "0"
+  WEB_URL = "https://task.trapstudio.it"
+  CORS_ALLOWED_ORIGINS = "https://task.trapstudio.it"
+  USE_MINIO = "0"
+  AWS_REGION = "auto"
+  AWS_S3_ENDPOINT_URL = "https://fly.storage.tigris.dev"
+  AWS_S3_BUCKET_NAME = "plane-trap-uploads"
+  FILE_SIZE_LIMIT = "5242880"
+  PGHOST = "plane-trap-db.internal"
+  PGDATABASE = "plane"
+  POSTGRES_USER = "plane"
+  POSTGRES_DB = "plane"
+  POSTGRES_PORT = "5432"
+  REDIS_HOST = "plane-trap-redis.internal"
+  REDIS_PORT = "6379"
+  RABBITMQ_HOST = "plane-trap-mq.internal"
+  RABBITMQ_PORT = "5672"
+  RABBITMQ_USER = "plane"
+  RABBITMQ_VHOST = "plane"
+
+[vm]
+  size = "shared-cpu-1x"
+  memory_mb = 512

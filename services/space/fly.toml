@@ -1,0 +1,9 @@
+app = "plane-trap-space"
+primary_region = "fra"
+
+[build]
+  image = "makeplane/plane-space:v1.4.3"
+
+[vm]
+  size = "shared-cpu-1x"
+  memory_mb = 512
